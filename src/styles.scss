@@ -131,7 +131,7 @@ aside.menu-sidebar.d-none.d-lg-block.clr{
  */
 
 .header-desktop{
-    background:#0da8e4;
+    background:#752830;
     -webkit-box-shadow:0 2px 5px 0 rgba(0,0,0,.1);
     -moz-box-shadow:0 2px 5px 0 rgba(0,0,0,.1);
     box-shadow:0 2px 5px 0 rgba(0,0,0,.1);
@@ -247,11 +247,11 @@ input.au-input.au-input-xl{
 }
 
 .total{
-    background:#205b8d;
+    background:#E2D3BB;
     line-height:43px;
     color:#fff;
     border-radius:30px;
-    border:1px solid #0da8e4;
+    border:1px solid #bdb09c;
     float:left;
     margin-top:7px;
     padding-left:17px
@@ -280,15 +280,15 @@ input.au-input.au-input-xl{
     right:0;
     min-width:95px;
     color:#fff;
-    border:1px solid #205b8d;
+    border:1px solid #bdb09c;
     -webkit-border-radius:3px;
     -moz-border-radius:3px;
     border-radius:43px;
-    background:#205b8d
+    background:#E2D3BB
 }
 
 .au-btn-submit:hover{
-    background:#05143f
+    background:#bdb09c;
 }
 
 .au-btn-submit>i{
@@ -365,9 +365,10 @@ input.au-input.au-input-xl{
 
 .navbar-sidebar .navbar-list li a{
     display:block;
-    color:#555;
+    color:#752830;
     font-size:16px;
-    padding:5px 0
+    padding:5px 0;
+    text-decoration:none;
 }
 
 .navbar-sidebar .navbar-list li a i{
@@ -375,7 +376,7 @@ input.au-input.au-input-xl{
 }
 
 .navbar-sidebar .navbar-list li a:hover{
-    color:#0da8e4
+    color:#be4450
 }
 
 /* 
@@ -554,6 +555,13 @@ input.au-input.au-input-xl{
     padding-bottom:0;
     font-weight:500;
     color:#585858
+}
+.add-btn{
+    color: white;
+    text-decoration: none;
+    background-color: #752830;
+    padding: 5px 8px;
+    border-radius: 3px;
 }
 
 /* 
