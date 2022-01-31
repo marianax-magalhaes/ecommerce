@@ -5,7 +5,7 @@ export interface Product {
     unitPrice:number;
     imageUrl: string;
     active: boolean;
-    unitInStock: number;
+    unitsInStock: number;
     dateCreated: Date;
     lastUpdate: Date;
 }
