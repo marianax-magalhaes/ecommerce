@@ -9,7 +9,10 @@ import {map} from 'rxjs/operators';
 })
 export class ProductService {
 
-  private baseUrl = 'http://localhost:8080/api/products'
+  // ?size=100 indica que queremos que mostre os 100 primeiros itens pq por default mostra apenas 20.
+  // private baseUrl = 'http://localhost:8080/api/products?size=100'
+
+  private baseUrl = 'http://localhost:8080/api/products?'
 
   constructor(private http: HttpClient) { }
 
