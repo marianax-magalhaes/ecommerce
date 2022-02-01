@@ -24,6 +24,14 @@ export class ProductService {
     return this.http.get<Product>(url);
   }
 
+// peguei de base o metood getProductList
+  getProductListPaginate(thePage: number, thePageSize: number, theCategoryId: number):Observable<GetResponseProducts>{
+    
+    const url = this.baseUrl + "/search/findByCategoryId?id=" + theCategoryId + "&page=" + thePage + "&size=" + thePageSize;
+
+    return this.http.get<GetResponseProducts>(url);
+  }
+
   getProductList(theCategoryId: number):Observable<Product[]>{
     const url = this.baseUrl + "/search/findByCategoryId?id=" + theCategoryId;
 
@@ -55,6 +63,13 @@ export class ProductService {
 interface GetResponseProducts{
   _embedded:{
     products: Product[];
+  },
+  // nova propriedade para a paginacao
+  page: {
+    size: number,
+    totalelements: number,
+    totalPages: number,
+    number: number
   }
 }
 
