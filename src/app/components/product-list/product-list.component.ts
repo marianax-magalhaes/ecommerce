@@ -30,7 +30,7 @@ export class ProductListComponent implements OnInit {
 
     if(hasCategoryID){
       // converter id de string para nome:
-      this.currentCategoryId = +this.route.snapshot.params.get('id');
+      this.currentCategoryId = +this.route.snapshot.paramMap.get('id')!;
     } else{
       // se nao existe o id, vamos para categoria 1:
       this.currentCategoryId = 1;

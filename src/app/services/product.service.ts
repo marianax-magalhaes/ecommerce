@@ -12,7 +12,7 @@ export class ProductService {
   // ?size=100 indica que queremos que mostre os 100 primeiros itens pq por default mostra apenas 20.
   // private baseUrl = 'http://localhost:8080/api/products?size=100'
 
-  private baseUrl = 'http://localhost:8080/api/products?'
+  private baseUrl = 'http://localhost:8080/api/products'
 
   constructor(private http: HttpClient) { }
 
