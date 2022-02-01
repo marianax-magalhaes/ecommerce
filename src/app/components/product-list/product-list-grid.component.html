@@ -2,7 +2,7 @@
 <div class="main-content">
     <div class="section-content section-content-p30">
 
-        <h4>Categoria: {{currentCategoryName}}</h4>
+        <!-- <h4>Categoria: {{currentCategoryName}}</h4> -->
 
         <div class="container-fluid">
             <div class="row">
@@ -16,6 +16,12 @@
                         <a href="" class="add-btn">Adicionar ao carrinho</a>
                     </div>
 
+                </div>
+
+                <!-- se a busca for invalida, mostrar mensagem -->
+                <!-- role garante acessibilidade -->
+                <div *ngIf="products?.length == 0" class="alert alert-warning col-md-12" role="alert">
+                    Nenhum produto encontrado!
                 </div>
                 
 

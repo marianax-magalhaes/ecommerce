@@ -17,6 +17,8 @@ export class ProductListComponent implements OnInit {
   currentCategoryId: number = 0;
   currentCategoryName: string = '';
 
+  searchMode: boolean = false;
+
   constructor(private service: ProductService, private route: ActivatedRoute) { }
 
   ngOnInit() {
@@ -26,6 +28,26 @@ export class ProductListComponent implements OnInit {
   }
 
   listProducts() {
+    this.searchMode = this.route.snapshot.paramMap.has('keyword');
+
+    if(this.searchMode){
+      this.handleSearchProducts();
+    } else{
+      this.handleListProducts();
+    }
+    
+  }
+
+  handleSearchProducts(){
+    const theKeyword: string = this.route.snapshot.paramMap.get('keyword')!;
+
+    this.service.searchProducts(theKeyword).subscribe(
+      (data)=>{
+        this.products=data;
+      })
+  }
+
+  handleListProducts(){
     // checar se id existe
     const hasCategoryID: boolean = this.route.snapshot.paramMap.has('id');
 
@@ -44,5 +66,7 @@ export class ProductListComponent implements OnInit {
       this.products = data;
     });
   }
+
+  
 
 }

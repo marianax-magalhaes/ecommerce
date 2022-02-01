@@ -7,13 +7,14 @@ import { ProductListComponent } from './components/product-list/product-list.com
 
 // essa constante router poderia estar dentro de app.module.ts, nem precisaria ter um arquivo so p isso!!!
 const routes: Routes = [
+  {path: 'search/:keyword', component: ProductListComponent},
   {path: 'category/:id/:name', component: ProductListComponent},
   {path: 'category', component: ProductListComponent},
   {path:'products', component: ProductListComponent},
   {path: '', redirectTo: '/products', pathMatch: 'full'},
   {path: '**', redirectTo: '/products', pathMatch: 'full'},
 ];
-
+ 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
