@@ -18,6 +18,11 @@ export class ProductService {
   private categoryUrl = 'http://localhost:8080/api/product-category'
 
   constructor(private http: HttpClient) { }
+  
+  getProduct(theProductId: number): Observable<Product>{
+    const url = this.baseUrl + "/" + theProductId;
+    return this.http.get<Product>(url);
+  }
 
   getProductList(theCategoryId: number):Observable<Product[]>{
     const url = this.baseUrl + "/search/findByCategoryId?id=" + theCategoryId;
@@ -31,6 +36,7 @@ export class ProductService {
     return this.getProducts(url);
   }
 
+  // como estava se repetindo, transofrmamos ele num metodo para o cdg ficar enxuto
   private getProducts(url: string): Observable<Product[]> {
     return this.http.get<GetResponseProducts>(url).pipe(
       map(response => response._embedded.products)

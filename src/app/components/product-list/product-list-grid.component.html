@@ -10,10 +10,13 @@
                 <!-- loop na colecao de produtos-->
                 <div *ngFor="let p of products" class="col-lg-3">
                     <div class="product-box">
-                        <img src="{{p.imageUrl}}" class="img-responsive">
-                        <h1>{{p.name}}</h1>
+
+                        <a routerLink="/products/{{p.id}}"><img src="{{p.imageUrl}}" class="img-responsive"></a>
+                        <a routerLink="/products/{{p.id}}"><h1>{{p.name}}</h1></a>
+                        
                         <div class="price">{{p.unitPrice | currency: 'BRL'}}</div>
                         <a href="" class="add-btn">Adicionar ao carrinho</a>
+
                     </div>
 
                 </div>
