@@ -3,7 +3,9 @@ import { RouterModule, Routes } from '@angular/router';
 import { ProductListComponent } from './components/product-list/product-list.component';
 
 // é importante organizar as rotas da mais especifica para mais generica!
-// o '**' indica que qualquer outro caminho vai levar ao redirect, é possivel tbm fazer com que ele va para um 404: "component: PageNotFoundComponent" e customiza-lo.
+// o '**' indica que qualquer outro caminho nao definido vai levar ao redirect, é possivel tbm fazer com que ele va para um componente customizado como" PageNotFoundComponent".
+
+// essa constante router poderia estar dentro de app.module.ts, nem precisaria ter um arquivo so p isso!!!
 const routes: Routes = [
   {path: 'category/:id', component: ProductListComponent},
   {path: 'category', component: ProductListComponent},
