@@ -44,6 +44,15 @@ export class ProductService {
     return this.getProducts(url);
   }
 
+  // peguei como base o getproductlistpaginate
+  searchProductsPaginate(thePage: number, thePageSize: number, theKeyword: string):Observable<GetResponseProducts>{
+    
+    const url = this.baseUrl + "/search/findByNameContaining?name=" + theKeyword + "&page=" + thePage + "&size=" + thePageSize;
+
+
+    return this.http.get<GetResponseProducts>(url);
+  }
+
   // como estava se repetindo, transofrmamos ele num metodo para o cdg ficar enxuto
   private getProducts(url: string): Observable<Product[]> {
     return this.http.get<GetResponseProducts>(url).pipe(
