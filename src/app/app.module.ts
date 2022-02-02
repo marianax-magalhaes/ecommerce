@@ -28,13 +28,14 @@ import { ReactiveFormsModule } from '@angular/forms';
     CartStatusComponent,
     CartDetailsComponent,
     CheckoutComponent,
-    ReactiveFormsModule
+    
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    NgbModule
+    NgbModule,
+    ReactiveFormsModule
     
   ],
   providers: [ProductService],
