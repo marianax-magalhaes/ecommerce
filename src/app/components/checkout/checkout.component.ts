@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { PottershopFormService } from 'src/app/services/pottershop-form.service';
 
 @Component({
   selector: 'app-checkout',
@@ -13,7 +14,10 @@ export class CheckoutComponent implements OnInit {
   totalPrice: number = 0;
   totalQuantity: number =0;
 
-  constructor(private formBuilder: FormBuilder) { }
+  creditCardYears: number[]=[];
+  creditCardMonths: number[]=[];
+
+  constructor(private formBuilder: FormBuilder, private pottershopFormService: PottershopFormService) { }
 
   ngOnInit(): void {
     this.checkoutFormGroup = this.formBuilder.group({
@@ -44,6 +48,22 @@ export class CheckoutComponent implements OnInit {
         expirationMonth: [''],
         expirationYear: [''],
       })
+    });
+
+    // popular o mes do cartao
+    const startMonth: number = new Date().getMonth() +1;
+    console.log("mes inicial" + startMonth)
+
+    this.pottershopFormService.getCrediCardMonths(startMonth).subscribe((data)=>{
+      console.log("meses recuperados: " + JSON.stringify(data));
+      this.creditCardMonths = data
+    })
+
+    // popular o ano do cartao
+
+    this.pottershopFormService.getCreditCardYears().subscribe((data)=>{
+      console.log("anos recuperados: " + JSON.stringify(data));
+      this.creditCardYears = data
     })
   }
 

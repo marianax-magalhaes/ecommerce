@@ -8,7 +8,7 @@ export class PottershopFormService {
 
   constructor() { }
 
-  getCredicardMonths(startMonth: number): Observable<number[]>{
+  getCrediCardMonths(startMonth: number): Observable<number[]>{
     let data: number[] = [];
 
     // lista suspensa para mes comecando no mes atual
