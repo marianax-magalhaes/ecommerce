@@ -22,13 +22,18 @@ export class CartService {
     let existingCartItem: CartItem | undefined = undefined;
 
     if(this.cartItems.length >0){
-      // achar o item no carrinho baseado no seu indica
-      for (let tempCartItem of this.cartItems){
-        if(tempCartItem.id === theCartItem.id){
-          existingCartItem = tempCartItem;
-          break;
-        }
-      }
+      // achar o item no carrinho baseado no seu id
+
+      // VAMOS REFATORAR ISSO!!
+      // for (let tempCartItem of this.cartItems){
+      //   if(tempCartItem.id === theCartItem.id){
+      //     existingCartItem = tempCartItem;
+      //     break;
+      //   }
+      // }
+
+      // teste condicional mais simples com o metodo find
+      existingCartItem = this.cartItems.find(tempCartItem => tempCartItem.id === theCartItem.id);
 
       // verificar se encontramos
       alreadyExistsInCart = (existingCartItem != undefined);
@@ -70,5 +75,6 @@ export class CartService {
       console.log("nome: " + tempCartItem.name + ", quantidade: " + tempCartItem.quantity + ", preço unitário: " + tempCartItem.unitPrice + ", subtotal: " + subTotalPrice);
     }
     console.log("Total: " + totalPriceValue.toFixed(2) + ", quantidade total: " + totalQuantityValue);
+    console.log("--------------------------");
   }
 }
