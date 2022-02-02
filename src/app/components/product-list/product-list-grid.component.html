@@ -15,7 +15,7 @@
                         <a routerLink="/products/{{p.id}}"><h1>{{p.name}}</h1></a>
                         
                         <div class="price">{{p.unitPrice | currency: 'BRL'}}</div>
-                        <a href="" class="add-btn">Adicionar ao carrinho</a>
+                        <button (click)="addToCart(p)" class="add-btn">Adicionar ao carrinho</button>
 
                     </div>
 
@@ -58,14 +58,14 @@
             <!-- paginação -->
             <div class="footer-pagination">
                 <div class="row">
-                    <div class="col-md-6">
+                    <div>
                     
                         <div class="row">
                             <div class="col-md-9" style="padding-left:30%">
                                 <ngb-pagination [(page)]="thePageNumber" 
                                                 [pageSize]="thePageSize"
                                                 [collectionSize]="theTotalElements"
-                                                [maxSize]="5"
+                                                 [maxSize]="5"
                                                 [boundaryLinks]="true"
                                                 (pageChange)="listProducts()">
 
