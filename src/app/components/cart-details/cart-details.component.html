@@ -2,44 +2,44 @@
     <div class="section-content section-content-p30">
         <div class="container-fluid">
 
-            <table class="table table-bordered">
-                <tr>
-                    <th width="20%">Imagem do Produto</th>
-                    <th width="50%">Detalhe do Produto</th>
-                    <th width="30%"></th>
-                </tr>
+            <div *ngIf="cartItems.length > 0">
+                <table class="table table-bordered">
+                    <tr>
+                        <th width="20%">Imagem do Produto</th>
+                        <th width="50%">Detalhe do Produto</th>
+                        <th width="30%"></th>
+                    </tr>
+                    <tr *ngFor="let item of cartItems">
+                        <td>
+                            <img src="{{item.imageUrl}}" class="img-resopnsive" width="150px">
+                        </td>
+                        <td>
+                            <p>{{item.name}}</p>
+                            <p>{{item.unitPrice | currency: 'BRL'}}</p>
+                        </td>
+                        <td>
+                            <div class="items">
+                                <label>Quantidade: </label>
+                                {{item.quantity}}
+                            </div>
+                            <p class="mt-2">Subtotal: {{item.quantity * item.unitPrice | currency: 'BRL'}}</p>
+                
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2"></td>
+                        <td style="font-weight: bold">
+                            <p>Quantidade Total: {{totalQuantity}}</p>
+                            <p>Entrega: Grátis</p>
+                            <p>Valor Total: {{totalPrice | currency: 'BRL'}}</p>
+                        </td>
+                    </tr>
+                </table>
+            </div>
 
-                <tr *ngFor="let item of cartItems">
-
-                    <td>
-                        <img src="{{item.imageUrl}}" class="img-resopnsive" width="150px">
-                    </td>
-
-                    <td>
-                        <p>{{item.name}}</p>
-                        <p>{{item.unitPrice | currency: 'BRL'}}</p>
-                    </td>
-
-                    <td>
-                        <div class="items">
-                            <label>Quantidade: </label>
-                            {{item.quantity}}
-                        </div>
-
-                        <p class="mt-2">Subtotal: {{item.quantity * item.unitPrice | currency: 'BRL'}}</p>
-                        
-                    </td>
-                </tr>
-
-                <tr>
-                    <td colspan="2"></td>
-                    <td style="font-weight: bold">
-                        <p>Quantidade Total: {{totalQuantity}}</p>
-                        <p>Entrega: Grátis</p>
-                        <p>Valor Total: {{totalPrice | currency: 'BRL'}}</p>
-                    </td>
-                </tr>
-            </table>
+            <div *ngIf="cartItems.length == 0" class="alert alert-warning col-md-12" role="alert">
+                O carrinho de compras está vazio!
+            </div>
 
         </div>
     </div>
