@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Country } from 'src/app/common/country';
-import { Customer } from 'src/app/common/customer';
 import { State } from 'src/app/common/state';
 import { PottershopFormService } from 'src/app/services/pottershop-form.service';
+import { potterValidators} from 'src/app/validators/potterValidators'
 
 @Component({
   selector: 'app-checkout',
@@ -25,7 +25,11 @@ export class CheckoutComponent implements OnInit {
   shippingAddressStates: State[] = [];
   billingAddressStates: State[] = [];
 
-  
+  // customer: Customer = {
+  //   firstName: '',
+  //   lastName: '',
+  //   email: ''
+  // }
     // firstName: any;
     // lastName: any;
     // email: any;
@@ -34,34 +38,39 @@ export class CheckoutComponent implements OnInit {
   constructor(private formBuilder: FormBuilder, private pottershopFormService: PottershopFormService) { }
 
   ngOnInit(): void {
-    this.checkoutFormGroup = this.formBuilder.group({
-      customer: this.formBuilder.group({
-        firstName: [null, [Validators.required, Validators.minLength(2)]],
-        lastName: [null, [Validators.required, Validators.minLength(2)]],
-        email: [null, [Validators.required, Validators.pattern('ˆ[a-z0-9._%+-] + @[a-z0-9.-] + \\.[a-z]{2,4)$')]]
+    this.checkoutFormGroup = new FormGroup({
+      customer: new FormGroup({
+        firstName: new FormControl('', [Validators.required, Validators.minLength(2), potterValidators.notOnlyWhiteSpace]),
+
+        lastName: new FormControl('', [Validators.required, Validators.minLength(2), potterValidators.notOnlyWhiteSpace]),
+
+        email: new FormControl('', [Validators.required, Validators.pattern('/^[a-z0-9.]+@[a-z0-9]+\.[a-z]+\.([a-z]+)?$/i'), potterValidators.notOnlyWhiteSpace])
         // esse padrao do email é para validar o formato nome@email.com
       }),
-      shippingAddress: this.formBuilder.group({
-        street: [''],
-        city: [''],
-        state: [''],
-        country: [''],
-        zipCode: [''],
+      shippingAddress: new FormGroup({
+        street: new FormControl('', [Validators.required, Validators.minLength(2), potterValidators.notOnlyWhiteSpace]),
+
+        city: new FormControl('', [Validators.required, Validators.minLength(2), potterValidators.notOnlyWhiteSpace]),
+
+        zipCode: new FormControl('', [Validators.required, Validators.minLength(6), potterValidators.notOnlyWhiteSpace]),
+
+        state: new FormControl('', [Validators.required,]),
+        country: new FormControl('', [Validators.required,])
       }),
-      billingAddress: this.formBuilder.group({
-        street: [''],
-        city: [''],
-        state: [''],
-        country: [''],
-        zipCode: [''],
+      billingAddress: new FormGroup({
+        street: new FormControl(''),
+        city: new FormControl(''),
+        state: new FormControl(''),
+        country: new FormControl(''),
+        zipCode: new FormControl('')
       }),
-      creditCard: this.formBuilder.group({
-        cardType: [''],
-        nameOnCard: [''],
-        cardNumber: [''],
-        securityCode: [''],
-        expirationMonth: [''],
-        expirationYear: [''],
+      creditCard: new FormGroup({
+        cardType: new FormControl(''),
+        nameOnCard: new FormControl(''),
+        cardNumber: new FormControl(''),
+        securityCode: new FormControl(''),
+        expirationMonth: new FormControl(''),
+        expirationYear: new FormControl('')
       })
     });
 
@@ -70,13 +79,13 @@ export class CheckoutComponent implements OnInit {
     console.log("mes inicial" + startMonth)
 
     this.pottershopFormService.getCrediCardMonths(startMonth).subscribe((data)=>{
-      console.log("meses recuperados: " + JSON.stringify(data));
+      // console.log("meses recuperados: " + JSON.stringify(data));
       this.creditCardMonths = data
     })
 
     // popular o ano do cartao
     this.pottershopFormService.getCreditCardYears().subscribe((data)=>{
-      console.log("anos recuperados: " + JSON.stringify(data));
+      // console.log("anos recuperados: " + JSON.stringify(data));
       this.creditCardYears = data
     })
 
@@ -98,12 +107,18 @@ export class CheckoutComponent implements OnInit {
     console.log(this.checkoutFormGroup.get('customer')!.value.email);
     console.log(this.checkoutFormGroup.get('shippingAddress')!.value.country.name);
     console.log(this.checkoutFormGroup.get('shippingAddress')!.value.state.name);
-    console.log("------------------------")
+    console.log("------------------------") 
   }
 
-  getFirstName(){return this.checkoutFormGroup.get('customer.firstName');}
-  getLastName(){return this.checkoutFormGroup.get('customer.lastName');}
-  getEmail(){return this.checkoutFormGroup.get('customer.email');}
+  get firstName(){return this.checkoutFormGroup.get('customer.firstName');}
+  get lastName(){return this.checkoutFormGroup.get('customer.lastName');}
+  get email(){return this.checkoutFormGroup.get('customer.email');}
+
+  get shippingAddressStreet(){return this.checkoutFormGroup.get('shippingAddress.street');}
+  get shippingAddressCity(){return this.checkoutFormGroup.get('shippingAddress.city');}
+  get shippingAddressState(){return this.checkoutFormGroup.get('shippingAddress.state');}
+  get shippingAddressCountry(){return this.checkoutFormGroup.get('shippingAddress.country');}
+  get shippingAddressZipCode(){return this.checkoutFormGroup.get('shippingAddress.zipcode');}
 
   copyShippingToBillingAddress(e: any){
     if(e.target.checked){

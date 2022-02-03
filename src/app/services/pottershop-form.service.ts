@@ -44,7 +44,7 @@ export class PottershopFormService {
 
     // lista suspensa para ano comecando no mes atual e pegar os proxs 10 anos
     const startYear: number = new Date().getFullYear();
-    const endYear: number = startYear +1000;
+    const endYear: number = startYear +10;
     for (let theYear = startYear; theYear <= endYear; theYear++){
       data.push(theYear);
     }
