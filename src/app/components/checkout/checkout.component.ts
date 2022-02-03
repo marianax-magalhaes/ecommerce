@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Country } from 'src/app/common/country';
+import { Customer } from 'src/app/common/customer';
 import { State } from 'src/app/common/state';
 import { PottershopFormService } from 'src/app/services/pottershop-form.service';
 
@@ -24,14 +25,21 @@ export class CheckoutComponent implements OnInit {
   shippingAddressStates: State[] = [];
   billingAddressStates: State[] = [];
 
+  
+    // firstName: any;
+    // lastName: any;
+    // email: any;
+  
+
   constructor(private formBuilder: FormBuilder, private pottershopFormService: PottershopFormService) { }
 
   ngOnInit(): void {
     this.checkoutFormGroup = this.formBuilder.group({
       customer: this.formBuilder.group({
-        firstName: [''],
-        lastName: [''],
-        email: ['']
+        firstName: [null, [Validators.required, Validators.minLength(2)]],
+        lastName: [null, [Validators.required, Validators.minLength(2)]],
+        email: [null, [Validators.required, Validators.pattern('ˆ[a-z0-9._%+-] + @[a-z0-9.-] + \\.[a-z]{2,4)$')]]
+        // esse padrao do email é para validar o formato nome@email.com
       }),
       shippingAddress: this.formBuilder.group({
         street: [''],
@@ -81,9 +89,21 @@ export class CheckoutComponent implements OnInit {
 
   onSubmit(){
     console.log("Submetendo o formulario...");
+
+    if(this.checkoutFormGroup.invalid){
+      this.checkoutFormGroup.markAllAsTouched();
+    }
+    
     console.log(this.checkoutFormGroup.get('customer')!.value);
     console.log(this.checkoutFormGroup.get('customer')!.value.email);
+    console.log(this.checkoutFormGroup.get('shippingAddress')!.value.country.name);
+    console.log(this.checkoutFormGroup.get('shippingAddress')!.value.state.name);
+    console.log("------------------------")
   }
+
+  getFirstName(){return this.checkoutFormGroup.get('customer.firstName');}
+  getLastName(){return this.checkoutFormGroup.get('customer.lastName');}
+  getEmail(){return this.checkoutFormGroup.get('customer.email');}
 
   copyShippingToBillingAddress(e: any){
     if(e.target.checked){

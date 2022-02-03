@@ -13,6 +13,15 @@
                         <div class="col-md-9">
                             <div class="input-space">
                                 <input formControlName="firstName" type="text">
+
+                                <div *ngIf="firstName.invalid && (firstName.dirty || firstName.touched)" class="alert alert-danger">
+                                    <div *ngIf="firstName.errors.required">
+                                        O campo "primeiro nome" é obrigatório!
+                                    </div>
+                                    <div *ngIf="firstName.errors.minlength">
+                                        O campo "primeiro nome" deve ter pelo menos 2 caracteres!
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -21,7 +30,16 @@
                         <div class="col-md-2"><label>Último nome</label></div>
                         <div class="col-md-9">
                             <div class="input-space">
-                                <input formControlName="lastName" type="text">
+                                <input formControlName="lastName" id="name" class="form-control" type="text" required>
+
+                                <div *ngIf="lastName.invalid && (lastName.dirty || lastName.touched)" class="alert alert-danger">
+                                    <div *ngIf="lastName.errors?.['required']">
+                                        O campo "último nome" é obrigatório!
+                                    </div>
+                                    <div *ngIf="lastName.errors?.['minlength']">
+                                        O campo "último nome" deve ter pelo menos 2 caracteres!
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -31,6 +49,15 @@
                         <div class="col-md-9">
                             <div class="input-space">
                                 <input formControlName="email" type="text">
+
+                                <div *ngIf="email.invalid && (email.dirty || email.touched)" class="alert alert-danger">
+                                    <div *ngIf="email.errors.required">
+                                        O campo "email" é obrigatório!
+                                    </div>
+                                    <div *ngIf="email.errors.minlength">
+                                        O campo "email" deve ser preenchido com um email válido!
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -125,7 +152,11 @@
                         <div class="col-md-2"><label>Estado</label></div>
                         <div class="col-md-9">
                             <div class="input-space">
-                                <select formControlName="state" type="text"></select>
+                                <select formControlName="state" type="text">
+                                    <option *ngFor="let state of shippingAddressStates" [ngValue]="state">
+                                        {{state.name}}
+                                    </option>
+                                </select>
                             </div>
                         </div>
                     </div>
