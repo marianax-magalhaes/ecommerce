@@ -81,4 +81,24 @@ export class CheckoutComponent implements OnInit {
     }
 
   }
+
+  handleMonthsAndYears(){
+    const creditCardFormGroup = this.checkoutFormGroup.get('creditCard');
+    const currentYear: number = new Date().getFullYear();const selectedYear: number = Number(creditCardFormGroup!.value.expirationYear);
+
+    // se ano atual é igual ao ano escolhido, entao comecar o mes no mes atual
+
+    let startMonth: number;
+
+    if(currentYear === selectedYear){
+      startMonth = new Date().getMonth() +1;
+    } else{
+      startMonth = 1;
+    }
+
+    this.pottershopFormService.getCrediCardMonths(startMonth).subscribe((data)=>{
+      console.log("JSON.stringify(data)")
+      this.creditCardMonths = data;
+    })
+  }
 }
