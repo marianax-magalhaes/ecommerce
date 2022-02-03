@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { Country } from 'src/app/common/country';
+import { State } from 'src/app/common/state';
 import { PottershopFormService } from 'src/app/services/pottershop-form.service';
 
 @Component({
@@ -16,6 +18,11 @@ export class CheckoutComponent implements OnInit {
 
   creditCardYears: number[]=[];
   creditCardMonths: number[]=[];
+
+  countries: Country[] = [];
+
+  shippingAddressStates: State[] = [];
+  billingAddressStates: State[] = [];
 
   constructor(private formBuilder: FormBuilder, private pottershopFormService: PottershopFormService) { }
 
@@ -60,10 +67,15 @@ export class CheckoutComponent implements OnInit {
     })
 
     // popular o ano do cartao
-
     this.pottershopFormService.getCreditCardYears().subscribe((data)=>{
       console.log("anos recuperados: " + JSON.stringify(data));
       this.creditCardYears = data
+    })
+
+    // popular paises
+    this.pottershopFormService.getCountries().subscribe((data)=>{
+      console.log("paises recuperados do bd: " + JSON.stringify(data));
+      this.countries=data;
     })
   }
 
@@ -99,6 +111,25 @@ export class CheckoutComponent implements OnInit {
     this.pottershopFormService.getCrediCardMonths(startMonth).subscribe((data)=>{
       console.log("JSON.stringify(data)")
       this.creditCardMonths = data;
+    })
+  }
+
+  getStates(formGroupName: string){
+    const formGroup = this.checkoutFormGroup.get(formGroupName);
+    const countryCode = formGroup!.value.country.code;
+    const countryName = formGroup!.value.country.name;
+
+    console.log("country code: " + countryCode + " country name: " + countryName);
+
+    this.pottershopFormService.getStates(countryCode).subscribe((data)=>{
+      if(formGroupName === 'shippingAddress'){
+        this.shippingAddressStates = data;
+      } else{
+        this.billingAddressStates = data;
+      }
+
+      // deixar o primeiro estado selecionado por default
+      formGroup!.get('state')!.setValue(data[0]);
     })
   }
 }

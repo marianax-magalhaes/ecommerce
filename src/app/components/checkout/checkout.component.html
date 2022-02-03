@@ -45,25 +45,11 @@
                         <div class="col-md-2"><label>País</label></div>
                         <div class="col-md-9">
                             <div class="input-space">
-                                <select formControlName="country" type="text"></select>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-md-2"><label>Rua</label></div>
-                        <div class="col-md-9">
-                            <div class="input-space">
-                                <input formControlName="street" type="text">
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-md-2"><label>Cidade</label></div>
-                        <div class="col-md-9">
-                            <div class="input-space">
-                                <input formControlName="city" type="text">
+                                <select formControlName="country" (change)="getStates('shippingAddress')">
+                                    <option *ngFor="let country of countries" [ngValue]="country">
+                                        {{country.name}}
+                                    </option>
+                                </select>
                             </div>
                         </div>
                     </div>
@@ -72,11 +58,25 @@
                         <div class="col-md-2"><label>Estado</label></div>
                         <div class="col-md-9">
                             <div class="input-space">
-                                <select formControlName="state" type="text"></select>
+                                <select formControlName="state">
+                                    <option *ngFor="let state of shippingAddressStates" [ngValue]="state">
+                                        {{state.name}}
+                                    </option>
+                                </select>
                             </div>
                         </div>
                     </div>
-
+                    
+                    <div class="row">
+                        <div class="col-md-2"><label>Cidade</label></div>
+                        <div class="col-md-9">
+                            <div class="input-space">
+                                <input formControlName="city" type="text">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    
                     <div class="row">
                         <div class="col-md-2"><label>CEP</label></div>
                         <div class="col-md-9">
@@ -85,7 +85,15 @@
                             </div>
                         </div>
                     </div>
-
+                    
+                    <div class="row">
+                        <div class="col-md-2"><label>Rua</label></div>
+                        <div class="col-md-9">
+                            <div class="input-space">
+                                <input formControlName="street" type="text">
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
                 <!-- checkbox para copiar endereço de entrega para cobrança -->
@@ -104,20 +112,24 @@
                         <div class="col-md-2"><label>País</label></div>
                         <div class="col-md-9">
                             <div class="input-space">
-                                <select formControlName="country" type="text"></select>
+                                <select formControlName="country">
+                                    <option *ngFor="let country of countries" [ngValue]="country">
+                                        {{country.name}}
+                                    </option>
+                                </select>
                             </div>
                         </div>
                     </div>
 
                     <div class="row">
-                        <div class="col-md-2"><label>Rua</label></div>
+                        <div class="col-md-2"><label>Estado</label></div>
                         <div class="col-md-9">
                             <div class="input-space">
-                                <select formControlName="street" type="text"></select>
+                                <select formControlName="state" type="text"></select>
                             </div>
                         </div>
                     </div>
-
+                    
                     <div class="row">
                         <div class="col-md-2"><label>Cidade</label></div>
                         <div class="col-md-9">
@@ -128,10 +140,10 @@
                     </div>
 
                     <div class="row">
-                        <div class="col-md-2"><label>Estado</label></div>
+                        <div class="col-md-2"><label>Rua</label></div>
                         <div class="col-md-9">
                             <div class="input-space">
-                                <select formControlName="state" type="text"></select>
+                                <input formControlName="street" type="text">
                             </div>
                         </div>
                     </div>
