@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Country } from 'src/app/common/country';
 import { State } from 'src/app/common/state';
+import { CartService } from 'src/app/services/cart.service';
 import { PottershopFormService } from 'src/app/services/pottershop-form.service';
 import { potterValidators} from 'src/app/validators/potterValidators'
 
@@ -35,9 +36,12 @@ export class CheckoutComponent implements OnInit {
     // email: any;
   
 
-  constructor(private formBuilder: FormBuilder, private pottershopFormService: PottershopFormService) { }
+  constructor(private formBuilder: FormBuilder, private pottershopFormService: PottershopFormService, private cartService: CartService) { }
 
   ngOnInit(): void {
+
+    this.reviewCartDetails();
+
     this.checkoutFormGroup = new FormGroup({
       customer: new FormGroup({
         firstName: new FormControl('', [Validators.required, Validators.minLength(2), potterValidators.notOnlyWhiteSpace]),
@@ -184,5 +188,10 @@ export class CheckoutComponent implements OnInit {
       // deixar o primeiro estado selecionado por default
       formGroup!.get('state')!.setValue(data[0]);
     })
+  }
+
+  reviewCartDetails(){
+    this.cartService.totalQuantity.subscribe((totalQuantity) => this.totalQuantity = totalQuantity);
+    this.cartService.totalPrice.subscribe((totalPrice) => this.totalPrice = totalPrice);
   }
 }
