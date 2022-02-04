@@ -58,7 +58,7 @@ export class CheckoutComponent implements OnInit {
         lastName: new FormControl('', [Validators.required, Validators.minLength(2), potterValidators.notOnlyWhiteSpace]),
 
         // essas expressoes de pattern chama-se regex
-        email: new FormControl('', [Validators.required, Validators.pattern('/^[a-z0-9.]+@[a-z0-9]+\.[a-z]+\.([a-z]+)?$/i'), potterValidators.notOnlyWhiteSpace])
+        email: new FormControl('', [Validators.required, Validators.email, potterValidators.notOnlyWhiteSpace])
         // esse padrao do email é para validar o formato nome@email.com
       }),
 
@@ -120,10 +120,10 @@ export class CheckoutComponent implements OnInit {
     console.log("Submetendo o formulario...");
     console.log("teste");
 
-    if(this.checkoutFormGroup.invalid){
-      this.checkoutFormGroup.markAllAsTouched();
-      return;
-    }
+    // if(this.checkoutFormGroup.invalid){
+    //   this.checkoutFormGroup.markAllAsTouched();
+    //   return;
+    // }
 
     // montar o pedido
     let order: Order = {
@@ -147,6 +147,7 @@ export class CheckoutComponent implements OnInit {
 
     // popular purchase com cliente
     purchase.customer = this.checkoutFormGroup.controls['customer'].value;
+    console.log(purchase.customer);
 
     // popular purchase com o endereco de entrega
     purchase.shippingAddress = this.checkoutFormGroup.controls['shippingAddress'].value;
