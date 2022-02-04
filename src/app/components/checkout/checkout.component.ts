@@ -44,9 +44,11 @@ export class CheckoutComponent implements OnInit {
 
         lastName: new FormControl('', [Validators.required, Validators.minLength(2), potterValidators.notOnlyWhiteSpace]),
 
+        // essas expressoes de pattern chama-se regex
         email: new FormControl('', [Validators.required, Validators.pattern('/^[a-z0-9.]+@[a-z0-9]+\.[a-z]+\.([a-z]+)?$/i'), potterValidators.notOnlyWhiteSpace])
         // esse padrao do email é para validar o formato nome@email.com
       }),
+
       shippingAddress: new FormGroup({
         street: new FormControl('', [Validators.required, Validators.minLength(2), potterValidators.notOnlyWhiteSpace]),
 
@@ -57,18 +59,23 @@ export class CheckoutComponent implements OnInit {
         state: new FormControl(null, [Validators.required,]),
         country: new FormControl(null, [Validators.required,])
       }),
+
       billingAddress: new FormGroup({
-        street: new FormControl(''),
-        city: new FormControl(''),
-        state: new FormControl(''),
-        country: new FormControl(''),
-        zipCode: new FormControl('')
+        street: new FormControl('', [Validators.required, Validators.minLength(2), potterValidators.notOnlyWhiteSpace]),
+
+        city: new FormControl('', [Validators.required, Validators.minLength(2), potterValidators.notOnlyWhiteSpace]),
+
+        zipCode: new FormControl('', [Validators.required, Validators.minLength(2), potterValidators.notOnlyWhiteSpace]),
+
+        state: new FormControl(null, [Validators.required,]),
+        country: new FormControl(null, [Validators.required,])
       }),
+
       creditCard: new FormGroup({
-        cardType: new FormControl(''),
-        nameOnCard: new FormControl(''),
-        cardNumber: new FormControl(''),
-        securityCode: new FormControl(''),
+        cardType: new FormControl('', [Validators.required]),
+        nameOnCard: new FormControl('', [Validators.required, Validators.minLength(2), potterValidators.notOnlyWhiteSpace]),
+        cardNumber: new FormControl('', [Validators.required, Validators.pattern('[0-9]{16}')]),
+        securityCode: new FormControl('', [Validators.required, Validators.pattern('[0-9]{3}')]),
         expirationMonth: new FormControl(''),
         expirationYear: new FormControl('')
       })
@@ -125,6 +132,11 @@ export class CheckoutComponent implements OnInit {
   get billingAddressState(){return this.checkoutFormGroup.get('shippingAddress.state');}
   get billingAddressCountry(){return this.checkoutFormGroup.get('shippingAddress.country');}
   get billingAddressZipCode(){return this.checkoutFormGroup.get('shippingAddress.zipcode');}
+
+  get creditCardType(){return this.checkoutFormGroup.get('creditcard.cardType');}
+  get creditCardNameOnCard(){return this.checkoutFormGroup.get('creditcard.nameOnCard');}
+  get creditCardNumber(){return this.checkoutFormGroup.get('creditcard.cardNumber');}
+  get creditCardSecurityCode(){return this.checkoutFormGroup.get('creditcard.securityCode');}
 
   copyShippingToBillingAddress(e: any){
     if(e.target.checked){
