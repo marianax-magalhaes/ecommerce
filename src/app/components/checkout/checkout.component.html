@@ -13,15 +13,14 @@
                         <div class="col-md-9">
                             <div class="input-space">
                                 <input formControlName="firstName" id="firstName" class="form-control" type="text">
-
-                                <div *ngIf="firstName!.invalid && (firstName!.dirty || firstName!.touched)" class="alert alert-danger">
-                                    <div *ngIf="firstName!.errors?.['required'] || firstName!.errors?.['notOnlyWhiteSpace']">
+                                
+                                    <div *ngIf="firstName!.touched && (firstName!.errors?.['required'] || firstName!.errors?.['notOnlyWhiteSpace'])" class="alert alert-danger">
                                         O campo "primeiro nome" é obrigatório!
                                     </div>
-                                    <div *ngIf="firstName!.errors?.['minlength']">
+                                    <div *ngIf="firstName!.errors?.['minlength']" class="alert alert-danger">
                                         O campo "primeiro nome" deve ter pelo menos 2 caracteres!
                                     </div>
-                                </div>
+                                
                             </div>
                         </div>
                     </div>
@@ -32,14 +31,14 @@
                             <div class="input-space">
                                 <input formControlName="lastName" id="lastName" class="form-control" type="text" required>
 
-                                <div *ngIf="lastName!.invalid && (lastName!.dirty || lastName!.touched)" class="alert alert-danger">
-                                    <div *ngIf="lastName!.errors?.['required'] || lastName!.errors?.['notOnlyWhiteSpace']">
+                                
+                                    <div *ngIf="lastName!.touched && (lastName!.errors?.['required'] || lastName!.errors?.['notOnlyWhiteSpace'])" class="alert alert-danger">
                                         O campo "último nome" é obrigatório!
                                     </div>
-                                    <div *ngIf="lastName!.errors?.['minlength']">
+                                    <div *ngIf="lastName!.errors?.['minlength']" class="alert alert-danger">
                                         O campo "último nome" deve ter pelo menos 2 caracteres!
                                     </div>
-                                </div>
+                                
                             </div>
                         </div>
                     </div>
@@ -50,14 +49,14 @@
                             <div class="input-space">
                                 <input formControlName="email" id="email" class="form-control" type="text">
 
-                                <div *ngIf="email!.invalid && (email!.dirty || email!.touched)" class="alert alert-danger">
-                                    <div *ngIf="email!.errors?.['required'] || email!.errors?.['notOnlyWhiteSpace']">
+                                
+                                    <div *ngIf="email!.touched && (email!.errors?.['required'] || email!.errors?.['notOnlyWhiteSpace'])" class="alert alert-danger">
                                         O campo "email" é obrigatório!
                                     </div>
-                                    <div *ngIf="email!.errors?.['pattern']">
+                                    <div *ngIf="email!.errors?.['pattern']" class="alert alert-danger">
                                         O campo "email" deve ser preenchido com um email válido!
                                     </div>
-                                </div>
+                                
                             </div>
                         </div>
                     </div>
@@ -78,15 +77,14 @@
                                     </option>
                                 </select>
 
-                                <div *ngIf="shippingAddressCountry!.invalid && (shippingAddressCountry!.dirty || shippingAddressCountry!.touched)" class="alert alert-danger">
-                                    <div *ngIf="shippingAddressCountry!.errors?.['required']">
+                                    <div *ngIf="shippingAddressCountry!.touched && shippingAddressCountry!.errors?.['required']" class="alert alert-danger">
                                         O campo "País" é obrigatório!
                                     </div>
 
-                                    <div *ngIf="shippingAddressCountry!.errors?.['minlength']">
+                                    <div *ngIf="shippingAddressCountry!.errors?.['minlength']" class="alert alert-danger">
                                         O campo "País" deve ter pelo menos 2 caracteres!
                                     </div>
-                                </div>
+                                
                                 
                             </div>
                         </div>
@@ -101,16 +99,14 @@
                                         {{state.name}}
                                     </option>
                                 </select>
-
-                                <div *ngIf="shippingAddressState!.invalid && (shippingAddressState!.dirty || shippingAddressState!.touched)" class="alert alert-danger">
-                                    <div *ngIf="shippingAddressState!.errors?.['required']">
+                        
+                                    <div *ngIf="shippingAddressState!.touched && shippingAddressState!.errors?.['required']" class="alert alert-danger">
                                         O campo "Estado" é obrigatório!
                                     </div>
 
-                                    <div *ngIf="shippingAddressState!.errors?.['minlength']">
+                                    <div *ngIf="shippingAddressState!.errors?.['minlength']" class="alert alert-danger">
                                         O campo "Estado" deve ter pelo menos 2 caracteres!
-                                    </div>
-                                </div>
+                                    </div>                          
 
                             </div>
                         </div>
@@ -122,15 +118,14 @@
                             <div class="input-space">
                                 <input formControlName="city" type="text">
 
-                                <div *ngIf="shippingAddressCity!.invalid && (shippingAddressCity!.dirty || shippingAddressCity!.touched)" class="alert alert-danger">
-                                    <div *ngIf="shippingAddressCity!.errors?.['required'] || shippingAddressCity!.errors?.['notOnlyWhiteSpace']">
+                                    <div *ngIf="shippingAddressCity!.touched && (shippingAddressCity!.errors?.['required'] || shippingAddressCity!.errors?.['notOnlyWhiteSpace'])" class="alert alert-danger">
                                         O campo "Cidade" é obrigatório!
                                     </div>
 
-                                    <div *ngIf="shippingAddressCity!.errors?.['minlength']">
-                                        O campo "Estado" deve ter pelo menos 2 caracteres!
+                                    <div *ngIf="shippingAddressCity!.errors?.['minlength']" class="alert alert-danger">
+                                        O campo "Cidade" deve ter pelo menos 2 caracteres!
                                     </div>
-                                </div>
+                            
                             </div>
                         </div>
                     </div>
@@ -143,11 +138,11 @@
                                 <input formControlName="zipCode" type="text">
 
                                 <div *ngIf="shippingAddressZipCode?.invalid && (shippingAddressZipCode!.dirty || shippingAddressZipCode!.touched)" class="alert alert-danger">
-                                    <div *ngIf="shippingAddressZipCode!.errors?.['required']">
+                                    <div *ngIf="shippingAddressZipCode!.errors?.['required']" class="alert alert-danger">
                                         O campo "CEP" é obrigatório!
                                     </div>
 
-                                    <div *ngIf="shippingAddressZipCode!.errors?.['minlength']">
+                                    <div *ngIf="shippingAddressZipCode!.errors?.['minlength']"class="alert alert-danger">
                                         O campo "CEP" precisa ter pelo menos 6 caracteres!
                                     </div>
                                 </div>
@@ -162,11 +157,14 @@
                                 <input formControlName="street" type="text">
                             </div>
 
-                            <div *ngIf="shippingAddressStreet!.invalid && (shippingAddressStreet!.dirty || shippingAddressStreet!.touched)" class="alert alert-danger">
-                                <div *ngIf="shippingAddressStreet!.errors?.['required'] || shippingAddressStreet!.errors?.['notOnlyWhiteSpace']">
+                                <div *ngIf="shippingAddressStreet!.touched && (shippingAddressStreet!.errors?.['required'] || shippingAddressStreet!.errors?.['notOnlyWhiteSpace'])" class="alert alert-danger">
                                     O campo "Rua" é obrigatório!
                                 </div>
-                            </div>
+                                <div *ngIf="shippingAddressStreet!.errors?.['minlength']" class="alert alert-danger">
+                                    O campo "Rua" precisa ter pelo menos 6 caracteres!
+                                </div>
+                                
+                            
 
                         </div>
                     </div>
@@ -194,11 +192,14 @@
                                     </option>
                                 </select>
 
-                                <div *ngIf="billingAddressCountry!.invalid && (billingAddressCountry!.dirty || billingAddressCountry!.touched)" class="alert alert-danger">
-                                    <div *ngIf="billingAddressCountry!.errors?.['required']">
-                                        O campo "País" é obrigatório!
-                                    </div>
+                                <div *ngIf="billingAddressCountry!.touched && billingAddressCountry!.errors?.['required']" class="alert alert-danger">
+                                    O campo "País" é obrigatório!
                                 </div>
+
+                                <div *ngIf="billingAddressCountry!.errors?.['minlength']" class="alert alert-danger">
+                                    O campo "País" deve ter pelo menos 2 caracteres!
+                                </div>
+
                             </div>
                         </div>
                     </div>
@@ -208,16 +209,19 @@
                         <div class="col-md-9">
                             <div class="input-space">
                                 <select formControlName="state" type="text">
-                                    <option *ngFor="let state of shippingAddressStates" [ngValue]="state">
+                                    <option *ngFor="let state of billingAddressStates" [ngValue]="state">
                                         {{state.name}}
                                     </option>
                                 </select>
 
-                                <div *ngIf="billingAddressState!.invalid && (billingAddressState!.dirty || billingAddressState!.touched)" class="alert alert-danger">
-                                    <div *ngIf="billingAddressState!.errors?.['required']">
-                                        O campo "Estado" é obrigatório!
-                                    </div>
+                                <div *ngIf="billingAddressState!.touched && shippingAddressState!.errors?.['required']" class="alert alert-danger">
+                                    O campo "Estado" é obrigatório!
                                 </div>
+
+                                <div *ngIf="billingAddressState!.errors?.['minlength']" class="alert alert-danger">
+                                    O campo "Estado" deve ter pelo menos 2 caracteres!
+                                </div>  
+
                             </div>
                         </div>
                     </div>
@@ -228,11 +232,14 @@
                             <div class="input-space">
                                 <input formControlName="city" type="text">
 
-                                <div *ngIf="billingAddressCity!.invalid && (billingAddressCity!.dirty || billingAddressCity!.touched)" class="alert alert-danger">
-                                    <div *ngIf="billingAddressCity!.errors?.['required'] || billingAddressCity!.errors?.['notOnlyWhiteSpace']">
-                                        O campo "Cidade" é obrigatório!
-                                    </div>
+                                <div *ngIf="billingAddressCity!.touched && (billingAddressCity!.errors?.['required'] || billingAddressCity!.errors?.['notOnlyWhiteSpace'])" class="alert alert-danger">
+                                    O campo "Cidade" é obrigatório!
                                 </div>
+
+                                <div *ngIf="billingAddressCity!.errors?.['minlength']" class="alert alert-danger">
+                                    O campo "Estado" deve ter pelo menos 2 caracteres!
+                                </div>
+
                             </div>
                         </div>
                     </div>
@@ -243,11 +250,13 @@
                             <div class="input-space">
                                 <input formControlName="street" type="text">
 
-                                <div *ngIf="billingAddressStreet!.invalid && (billingAddressStreet!.dirty || billingAddressStreet!.touched)" class="alert alert-danger">
-                                    <div *ngIf="billingAddressStreet!.errors?.['required'] || billingAddressStreet!.errors?.['notOnlyWhiteSpace']">
-                                        O campo "Rua" é obrigatório!
-                                    </div>
+                                <div *ngIf="billingAddressStreet!.touched && (billingAddressStreet!.errors?.['required'] || billingAddressStreet!.errors?.['notOnlyWhiteSpace'])" class="alert alert-danger">
+                                    O campo "Rua" é obrigatório!
                                 </div>
+                                <div *ngIf="billingAddressStreet!.errors?.['minlength']" class="alert alert-danger">
+                                    O campo "Rua" precisa ter pelo menos 6 caracteres!
+                                </div>
+
                             </div>
                         </div>
                     </div>
@@ -258,7 +267,7 @@
                             <div class="input-space">
                                 <input formControlName="zipCode" type="text">
 
-                                <div *ngIf="billingAddressZipCode?.invalid && (billingAddressZipCode!.dirty || billingAddressZipCode!.touched)" class="alert alert-danger">
+                                <!-- <div *ngIf="billingAddressZipCode?.invalid && (billingAddressZipCode!.dirty || billingAddressZipCode!.touched)" class="alert alert-danger">
                                     <div *ngIf="billingAddressZipCode!.errors?.['required'] || billingAddressZipCode!.errors?.['notOnlyWhiteSpace']">
                                         O campo "CEP" é obrigatório!
                                     </div>
@@ -266,7 +275,7 @@
                                     <div *ngIf="billingAddressZipCode!.errors?.['minlength']">
                                         O campo "CEP" precisa ter pelo menos 6 caracteres!
                                     </div>
-                                </div>
+                                </div> -->
                             </div>
                         </div>
                     </div>
@@ -291,7 +300,7 @@
                                         O campo "Tipo" é obrigatório!
                                     </div>
                                 </div>
-                                
+
                             </div>
                         </div>
                     </div>

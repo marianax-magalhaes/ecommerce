@@ -67,7 +67,7 @@ export class CheckoutComponent implements OnInit {
 
         city: new FormControl('', [Validators.required, Validators.minLength(2), potterValidators.notOnlyWhiteSpace]),
 
-        zipCode: new FormControl('', [Validators.required, Validators.minLength(6), potterValidators.notOnlyWhiteSpace]),
+        zipCode: new FormControl('', [Validators.required, Validators.minLength(2)]),
 
         state: new FormControl(null, [Validators.required,]),
         country: new FormControl(null, [Validators.required,])
