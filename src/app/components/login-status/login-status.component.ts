@@ -11,7 +11,7 @@ export class LoginStatusComponent implements OnInit {
 
   isAuthenticated: boolean = false;
 
-  userFullName: string = '';
+  userFullName: any = '';
 
   constructor(private oktaAuthService: OktaAuth, public authStateService: OktaAuthStateService) { }
 
@@ -23,8 +23,16 @@ export class LoginStatusComponent implements OnInit {
 
   getUserDetails(){
     if(this.isAuthenticated){
-      this.authStateService
+      this.oktaAuthService.getUser().then(
+        respo =>{
+          this.userFullName = respo.name;
+        }
+      );
     }
+  }
+
+  logout(){
+    this.oktaAuthService.signOut();
   }
 
 }
