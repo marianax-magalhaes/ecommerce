@@ -19,7 +19,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { LoginComponent } from './components/login/login.component';
 import { LoginStatusComponent } from './components/login-status/login-status.component';
 
-import { OktaAuthModule } from '@okta/okta-angular';
+// import { OktaAuthModule } from '@okta/okta-angular';
 
 
 @NgModule({
@@ -42,7 +42,7 @@ import { OktaAuthModule } from '@okta/okta-angular';
     HttpClientModule,
     NgbModule,
     ReactiveFormsModule,
-    OktaAuthModule
+    // OktaAuthModule
     
   ],
   providers: [ProductService],
