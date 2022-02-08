@@ -19,7 +19,26 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { LoginComponent } from './components/login/login.component';
 import { LoginStatusComponent } from './components/login-status/login-status.component';
 
-// import { OktaAuthModule } from '@okta/okta-angular';
+import {
+  OKTA_CONFIG,
+  OktaAuthModule,
+  OktaCallbackComponent,
+  OktaAuthGuard,
+} from '@okta/okta-angular';
+
+import { OktaAuth } from '@okta/okta-auth-js';
+import { CartService } from './services/cart.service';
+import { CheckoutService } from './services/checkout.service';
+import { PottershopFormService } from './services/pottershop-form.service';
+
+const config = {
+  clientId: '0oa3towog0qQnX4FH5d7',
+  issuer:'https://dev-66716514.okta.com/oauth2/default',
+  redirectUri:'http://localhost:4200/login/callback',
+  scopes: ['openid', 'profile', 'email']
+}
+
+const oktaAuth = new OktaAuth(config);
 
 
 @NgModule({
@@ -42,10 +61,14 @@ import { LoginStatusComponent } from './components/login-status/login-status.com
     HttpClientModule,
     NgbModule,
     ReactiveFormsModule,
-    // OktaAuthModule
+    OktaAuthModule,
+    
     
   ],
-  providers: [ProductService],
+  providers: [ProductService, { 
+    provide: OKTA_CONFIG, 
+    useValue: { oktaAuth } 
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
