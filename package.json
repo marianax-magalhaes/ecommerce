@@ -23,6 +23,7 @@
     "@okta/okta-angular": "^5.1.1",
     "@okta/okta-auth-js": "^6.0.0",
     "@okta/okta-signin-widget": "^6.0.0",
+    "angular-oauth2-oidc": "^13.0.1",
     "bootstrap": "^5.1.3",
     "rxjs": "~6.6.0",
     "rxjs-compat": "^6.6.7",

@@ -19,6 +19,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { LoginComponent } from './components/login/login.component';
 import { LoginStatusComponent } from './components/login-status/login-status.component';
 
+import { OktaAuthModule } from '@okta/okta-angular';
+
 
 @NgModule({
   declarations: [
@@ -39,7 +41,8 @@ import { LoginStatusComponent } from './components/login-status/login-status.com
     AppRoutingModule,
     HttpClientModule,
     NgbModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    OktaAuthModule
     
   ],
   providers: [ProductService],
