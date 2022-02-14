@@ -1,12 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import myAppConfig from '../../config/my-app-config';
-import * as OktaSignIn from '@okta/okta-signin-widget';
-import {
-  OKTA_CONFIG,
-  OktaAuthModule,
-} from '@okta/okta-angular';
 
-import { OktaAuth } from '@okta/okta-auth-js'
+import { OktaAuthStateService } from '@okta/okta-angular';
+import { Tokens } from '@okta/okta-auth-js';
+//@ts-ignore
+import * as OktaSignIn from '@okta/okta-signin-widget';
 
 
 @Component({
@@ -16,36 +13,24 @@ import { OktaAuth } from '@okta/okta-auth-js'
 })
 export class LoginComponent implements OnInit {
 
+  authService;
+  widget = new OktaSignIn({
+    el: '#okta-signin-container',
+    issuer:'https://dev-66716514.okta.com/oauth2/default',
+    authParams: {
+      pkce: true
+    },
+         clientId: '0oa3towog0qQnX4FH5d7',
+         redirectUri: 'http://localhost:4200/login/callback'
+  });
+
   oktaSignin: any;
 
-  constructor(private oktaAuthService: OktaAuth) { 
-    this.oktaSignin = new OktaSignIn ({
-      logo: 'assets/images/hp-logo.png',
-      baseUrl: myAppConfig.oidc.issuer.split('/oauth2')[0],
-      clientId: myAppConfig.oidc.clientId,
-      redirectUri: myAppConfig.oidc.redirectUri,
-      authParams: {
-        pkce: true,
-        issuer: myAppConfig.oidc.issuer,
-        scopes: myAppConfig.oidc.scopes
-      }
-    })
+  constructor() { 
   }
 
   ngOnInit(): void {
-    this.oktaSignin.remove();
-
-    this.oktaSignin.renderEl({
-      // el tem o mesmo nome do id na tag div do html
-      el:'#okta-sign-in-widget'},
-      (response: { status: string; })=>{
-        if(response.status === 'SUCCESS'){
-          this.oktaAuthService.signInWithRedirect();
-        }
-      }, (error: any) =>{
-        throw error;
-      }
-    )
+    
   }
 
 }

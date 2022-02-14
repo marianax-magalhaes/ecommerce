@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { OktaAuthStateService } from '@okta/okta-angular';
-import { OktaAuth } from '@okta/okta-auth-js'
+import { OktaAuth } from '@okta/okta-auth-js';
+
 
 @Component({
   selector: 'app-login-status',
@@ -13,26 +15,20 @@ export class LoginStatusComponent implements OnInit {
 
   userFullName: any = '';
 
-  constructor(private oktaAuthService: OktaAuth, public authStateService: OktaAuthStateService) { }
+  constructor(public oktaAuth: OktaAuth, private router: Router) {
+   }
 
-  ngOnInit(): void {
-    this.authStateService.authState$.subscribe((result:any)=>{
-      this.isAuthenticated = result.user.isAuthenticated;this.getUserDetails();
-    })
+  async ngOnInit(): Promise<void> {
+    this.isAuthenticated = await this.oktaAuth.isAuthenticated();
   }
 
-  getUserDetails(){
-    if(this.isAuthenticated){
-      this.oktaAuthService.getUser().then(
-        respo =>{
-          this.userFullName = respo.name;
-        }
-      );
-    }
+  async login() {
+    await this.oktaAuth.signInWithRedirect();
   }
 
-  logout(){
-    this.oktaAuthService.signOut();
+  async logout() {
+    await this.oktaAuth.signOut();
   }
 
+  
 }
